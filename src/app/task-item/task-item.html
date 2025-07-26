@@ -1,0 +1,33 @@
+<article
+  [class]="{
+    'status-open': taskData().status === 'To Do',
+    'status-in-progress': taskData().status === 'In Progress',
+    'status-done': taskData().status === 'Done'
+  }"
+>
+  <header>
+    <h3>{{ taskData().title }}</h3>
+    <p>{{ taskData().status }}</p>
+    <p>{{taskData().dueDate}}</p>
+  </header>
+  <p>{{ taskData().description }}</p>
+  <form (ngSubmit)="onChangeTaskStatus(taskData().id, status.value)">
+    <select #status>
+      <option value="To Do" [selected]="taskData().status === 'To Do'">
+        Open
+      </option>
+      <option
+        value="in-progress"
+        [selected]="taskData().status === 'In Progress'"
+      >
+        In-Progress
+      </option>
+      <option value="Done" [selected]="taskData().status === 'Done'">
+        Done
+      </option>
+    </select>
+    <p>
+      <button>Change Status</button>
+    </p>
+  </form>
+</article>
